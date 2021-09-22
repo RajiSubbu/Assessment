@@ -1,0 +1,37 @@
+---
+
+ hosts: localhost
+	tasks:
+	- name: Deploy PHP Web application
+	  docker_container:
+		image: problemsetters/801133-ansible
+		state: present
+		ports:
+		- "8080:80"
+  
+	tasks:
+	 - name: Getting info on web and db containers
+	   docker_container_info:
+		- name: web
+		  register: WEBresult
+		  
+		- name: 
+		  debug:
+			msg: "The container {{ 'exists' if WEBresult.exists else 'does not exist' }}"
+
+		- name: Displaying info about web container
+		  debug:
+			var: WEBresult.container
+		  when: WEBresult.exists
+		
+		name: db
+		register: DBresult
+		  
+		- name: 
+		  debug:
+			msg: "The container {{ 'exists' if DBresult.exists else 'does not exist' }}"
+
+		- name: Displaying info about db container
+		  debug:
+			var: DBresult.container
+		  when: DBresult.exists
