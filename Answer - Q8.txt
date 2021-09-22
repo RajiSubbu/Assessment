@@ -1,0 +1,17 @@
+---
+- hosts: testmachines
+  tasks:
+	- name: Clone Git Repo
+	  git:
+		repo: https://github.com/ProblemSetters/devops-inventory.git
+		dest: /tmp/devops-inventory
+		clone: yes
+
+	- name: Change File Permission
+	  file: 
+		  path: /tmp/devops-inventory/script.sh
+		  mode: '0775'
+	  
+	- name: Run Shell Script
+	  shell: 
+	    "/tmp/devops-inventory/script.sh"
