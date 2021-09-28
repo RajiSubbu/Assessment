@@ -2,7 +2,7 @@
 
  hosts: localhost
 	tasks:
-	- name: Deploy PHP Web application
+	- name: CHANGED
 	  docker_container:
 		image: problemsetters/801133-ansible
 		state: present
